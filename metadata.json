@@ -1,0 +1,41 @@
+{
+  "name": "puppet-php",
+  "version": "1.0.0",
+  "author": "SilverStripe Ltd",
+  "license": "BSD-3-Clause",
+  "summary": "Puppet module for setting up PHP using deb.sury.org packages",
+  "source": "https://github.com/silverstripeltd/puppet-php",
+  "project_page": "https://github.com/silverstripeltd/puppet-php",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=4.6.0 < 5.0.0"
+    },
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">=2.1.0 < 3.0.0"
+    },
+    {
+      "name": "puppetlabs/inifile",
+      "version_requirement": ">=1.6.0 < 2.0.0"
+    },
+    {
+      "name": "voxpupuli/alternatives",
+      "version_requirement": ">=1.0.1 < 2.0.0"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">=3.0.0 < 5.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    }
+  ]
+}
