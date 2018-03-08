@@ -1,4 +1,4 @@
-class php::repo {
+class ss_php::repo {
 	include apt
 
 	apt::key { "php":
@@ -8,7 +8,7 @@ class php::repo {
 
 	ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
 
-	::apt::source { "php":
+	apt::source { "php":
 		location => "https://packages.sury.org/php/",
 		release => $::lsbdistcodename,
 		repos => "main",

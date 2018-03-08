@@ -1,4 +1,4 @@
-define php::config::setting(
+define ss_php::config::setting(
 	$file,
 	$key,
 	$value,
