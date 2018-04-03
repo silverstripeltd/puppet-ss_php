@@ -1,9 +1,19 @@
-class ss_php::repo {
+class ss_php::repo(
+	$http_proxy = nil,
+) {
 	include apt
 
-	apt::key { "php":
-		key => "DF3D585DB8F0EB658690A554AC0E47584A7A714D",
-		key_source => "https://packages.sury.org/php/apt.gpg",
+	if $http_proxy!=nil {
+		$env = [ "http_proxy=$http_proxy", "https_proxy=$http_proxy", ]
+	} else {
+		$env = []
+	}
+
+	$keypath = '/etc/apt/trusted.gpg.d/php.gpg'
+	exec { "sury-php-key":
+		environment => $env,
+		command => "/usr/bin/wget -O $keypath https://packages.sury.org/php/apt.gpg",
+		creates => $keypath,
 	}
 
 	ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
@@ -14,7 +24,7 @@ class ss_php::repo {
 		repos => "main",
 		include_src => false,
 		require => [
-			Apt::Key["php"],
+			Exec["sury-php-key"],
 			Package["apt-transport-https", "lsb-release", "ca-certificates"]
 		],
 	}

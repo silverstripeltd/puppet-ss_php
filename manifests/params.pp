@@ -4,5 +4,6 @@ class ss_php::params(
 	$dev = true,
 	$apcu = true,
 	$imagick = true,
+	$http_proxy = nil,
 ) {
 }
