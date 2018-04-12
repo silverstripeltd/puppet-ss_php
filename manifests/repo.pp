@@ -1,21 +1,21 @@
 class ss_php::repo {
-	include apt
+  include apt
 
-	apt::key { "php":
-		key => "DF3D585DB8F0EB658690A554AC0E47584A7A714D",
-		content => file("ss_php/sury-apt-php.gpg"),
-	}
+  apt::key { 'php':
+    key     => 'DF3D585DB8F0EB658690A554AC0E47584A7A714D',
+    content => file('ss_php/sury-apt-php.gpg'),
+  }
 
-	ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
+  ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
 
-	apt::source { "php":
-		location => "https://packages.sury.org/php/",
-		release => $::lsbdistcodename,
-		repos => "main",
-		include_src => false,
-		require => [
-			Apt::Key["php"],
-			Package["apt-transport-https", "lsb-release", "ca-certificates"]
-		],
-	}
+  apt::source { 'php':
+    location    => 'https://packages.sury.org/php/',
+    release     => $::lsbdistcodename,
+    repos       => 'main',
+    include_src => false,
+    require     => [
+      Apt::Key['php'],
+      Package['apt-transport-https', 'lsb-release', 'ca-certificates']
+    ],
+  }
 }
