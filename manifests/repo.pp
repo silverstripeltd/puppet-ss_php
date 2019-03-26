@@ -2,7 +2,7 @@ class ss_php::repo {
   include apt
 
   apt::key { 'php':
-    key     => 'DF3D585DB8F0EB658690A554AC0E47584A7A714D',
+    key     => '15058500A0235D97F5D10063B188E2B695BD4743',
     content => file('ss_php/sury-apt-php.gpg'),
   }
 
