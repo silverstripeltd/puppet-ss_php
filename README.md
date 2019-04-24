@@ -1,5 +1,6 @@
-Switches between deb.sury.org PHP versions.
+Switches between deb.sury.org PHP versions, updated to support Stretch
 
-Currently only works on Debian 8, with Puppet 3.
-
-Partially based on https://github.com/voxpupuli/puppet-php.
+## Testing
+```
+bundler exec rake spec
+```

@@ -3,20 +3,20 @@ class ss_php::install inherits ::ss_php {
     ensure => present,
   }
   alternatives { 'php':
-    path    => "/usr/bin/php${globals_php_version}",
+    path    => "/usr/bin/php${::ss_php::globals_php_version}",
     require => Ss_php::Package['cli'],
   }
 
-  if $dev {
+  if $::ss_php::dev {
     ss_php::package { 'dev':
       ensure => present,
     }
     alternatives { 'php-config':
-      path    => "/usr/bin/php-config${globals_php_version}",
+      path    => "/usr/bin/php-config${::ss_php::globals_php_version}",
       require => Ss_php::Package['dev'],
     }
     alternatives { 'phpize':
-      path    => "/usr/bin/phpize${globals_php_version}",
+      path    => "/usr/bin/phpize${::ss_php::globals_php_version}",
       require => Ss_php::Package['dev'],
     }
   } else {
@@ -25,7 +25,7 @@ class ss_php::install inherits ::ss_php {
     }
   }
 
-  if $apcu {
+  if $::ss_php::apcu {
     package { 'php-apcu':
       ensure  => present,
       require => Ss_php::Package['cli'],
@@ -36,7 +36,7 @@ class ss_php::install inherits ::ss_php {
     }
   }
 
-  if $imagick {
+  if $::ss_php::imagick {
     package { 'php-imagick':
       ensure  => present,
       require => Ss_php::Package['cli'],
