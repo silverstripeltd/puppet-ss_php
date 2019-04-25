@@ -12,7 +12,9 @@ class ss_php::repo {
     location    => 'https://packages.sury.org/php/',
     release     => $::lsbdistcodename,
     repos       => 'main',
-    include_src => false,
+    include     => {
+      src => false
+    },
     require     => [
       Apt::Key['php'],
       Package['apt-transport-https', 'lsb-release', 'ca-certificates']
