@@ -8,16 +8,22 @@ class ss_php::repo {
 
   ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
 
-  apt::source { 'php':
-    location    => 'https://packages.sury.org/php/',
-    release     => $::lsbdistcodename,
-    repos       => 'main',
-    include     => {
-      src => false
-    },
-    require     => [
-      Apt::Key['php'],
-      Package['apt-transport-https', 'lsb-release', 'ca-certificates']
-    ],
+  if ($::operatingsystem == 'Ubuntu') {
+    apt::ppa { 'ppa:ondrej/php': }
+  } elsif $::operatingsystem == 'Debian' {
+    apt::source { 'php':
+      location    => 'https://packages.sury.org/php/',
+      release     => $::lsbdistcodename,
+      repos       => 'main',
+      include     => {
+        src => false
+      },
+      require     => [
+        Apt::Key['php'],
+        Package['apt-transport-https', 'lsb-release', 'ca-certificates']
+      ],
+    }
+  } else {
+    fail('Unsupported operating system for PHP')
   }
 }
