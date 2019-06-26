@@ -30,7 +30,6 @@ class ss_php::install inherits ::ss_php {
   if $::ss_php::apcu {
     package { 'php-apcu':
       ensure  => present,
-      require => Ss_php::Package['cli'],
     }
   } else {
     package { 'php-apcu':
@@ -41,7 +40,6 @@ class ss_php::install inherits ::ss_php {
   if $::ss_php::imagick {
     package { 'php-imagick':
       ensure  => present,
-      require => Ss_php::Package['cli'],
     }
   } else {
     package { 'php-imagick':
