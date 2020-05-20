@@ -13,9 +13,18 @@ class ss_php::repo {
     release     => $::lsbdistcodename,
     repos       => 'main',
     include_src => false,
+    notify   => Exec['ss_php_repo_force_update'],
     require     => [
       Apt::Key['php'],
       Package['apt-transport-https', 'lsb-release', 'ca-certificates']
     ],
   }
+
+  exec { 'ss_php_repo_force_update':
+      command     => "/bin/echo 'Apt update after adding sury repo'",
+      refreshonly => true,
+      logoutput   => true,
+      subscribe   => Exec['apt_update'],
+  }
+
 }
