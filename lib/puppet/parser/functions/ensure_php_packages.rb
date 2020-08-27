@@ -27,13 +27,18 @@ EOS
       defaults = { "ensure" => "present" }
     end
 
+    packagesToInstall = {}
+
     versions.each do |version|
       packages.each do |package|
         if version.to_s >= "7.2" && package === "mcrypt"
           next
         end
-        function_ensure_resource(["package", "php#{version.to_s}-#{package}", defaults])
+        packagesToInstall["php#{version.to_s}-#{package}"] = defaults
       end
     end
+
+    Puppet::Parser::Functions.function(:ensure_resources)
+    function_ensure_resources(["package", packagesToInstall, defaults])
   end
 end
