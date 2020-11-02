@@ -1,5 +1,5 @@
 class ss_php(
-  Optional[Pattern[/^[57].[0-9]/]] $php_version = $::ss_php::params::php_version,
+  Optional[Pattern[/^[578].[0-9]/]] $php_version = $::ss_php::params::php_version,
   $cli = $::ss_php::params::cli,
   $dev = $::ss_php::params::dev,
 ) inherits ::ss_php::params {

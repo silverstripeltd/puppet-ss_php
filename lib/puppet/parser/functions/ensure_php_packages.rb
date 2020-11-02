@@ -32,6 +32,9 @@ EOS
         if version.to_s >= "7.2" && package === "mcrypt"
           next
         end
+        if version.to_s >= "8.0" && (package === "xmlrpc" || package === "json")
+          next
+        end
         function_ensure_resource(["package", "php#{version.to_s}-#{package}", defaults])
       end
     end
