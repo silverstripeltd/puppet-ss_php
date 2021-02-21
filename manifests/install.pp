@@ -28,12 +28,14 @@ class ss_php::install inherits ::ss_php {
   }
 
   if $::ss_php::apcu {
-    package { 'php-apcu':
-      ensure  => present,
+    package {
+      'php-apcu': ensure  => present;
+      'php-apcu-bc': ensure  => present;
     }
   } else {
-    package { 'php-apcu':
-      ensure => absent,
+    package {
+      'php-apcu': ensure => absent;
+      'php-apcu-bc': ensure  => absent;
     }
   }
 
