@@ -1,0 +1,27 @@
+name: Puppet Parser Validate
+
+on:
+  push:
+    branches:
+      - master
+      - repo-apt-update
+      - puppet-upgrade
+  pull_request:
+    branches:
+      - master
+      - repo-apt-update
+      - puppet-upgrade
+
+jobs:
+  puppet-parser-validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: puppet-parser-validate
+      uses: irasnyd/puppet-parser-validate-action@master
+      with:
+        args: ./
