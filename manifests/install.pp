@@ -24,26 +24,4 @@ class ss_php::install inherits ::ss_php {
       ensure => absent,
     }
   }
-
-  if $apcu {
-    package { 'php-apcu':
-      ensure  => present,
-      require => Ss_php::Package['cli'],
-    }
-  } else {
-    package { 'php-apcu':
-      ensure => absent,
-    }
-  }
-
-  if $imagick {
-    package { 'php-imagick':
-      ensure  => present,
-      require => Ss_php::Package['cli'],
-    }
-  } else {
-    package { 'php-imagick':
-      ensure => absent,
-    }
-  }
 }
