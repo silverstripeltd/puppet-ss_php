@@ -15,6 +15,7 @@ class ss_php::repo {
       location    => 'https://packages.sury.org/php/',
       release     => $::lsbdistcodename,
       repos       => 'main',
+      notify      => Exec['ss_php_repo_force_update'],
       include     => {
         src => false
       },
@@ -26,4 +27,12 @@ class ss_php::repo {
   } else {
     fail('Unsupported operating system for PHP')
   }
+
+  exec { 'ss_php_repo_force_update':
+      command     => "/bin/echo 'Apt update after adding sury repo'",
+      refreshonly => true,
+      logoutput   => true,
+      subscribe   => Exec['apt_update'],
+  }
+  
 }
