@@ -2,8 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.2-jessie-node-browsers
+      - image: circleci/ruby:2.5.1-stretch-node-browsers
     steps:
       - checkout
-      - run: bundle install
-      - run: rake spec
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            sudo gem update --system --no-user-install
+            sudo gem install bundler
+      - run: sudo bundle install
+      - run: sudo bundle exec rake spec
