@@ -3,7 +3,5 @@ class ss_php::params(
   $cli_inifile = '/etc/php/7.1/cli/php.ini',
   $cli = true,
   $dev = true,
-  $apcu = true,
-  $imagick = true,
 ) {
 }
