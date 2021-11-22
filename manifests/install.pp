@@ -26,4 +26,11 @@ class ss_php::install inherits ::ss_php {
       ensure => absent,
     }
   }
+
+  # Remove metapackages we used to install. We just want specific versions.
+  package {
+    'php-apcu': ensure => absent;
+    'php-apcu-bc': ensure  => absent;
+    'php-imagick': ensure  => absent;
+  } -> Ss_php::Package <| |>
 }
