@@ -11,7 +11,12 @@ define ss_php::package(
     notice("${name} is not available as a standard package for PHP <= 5.6. Skipping install")
   } else {
     package { "php${php_version}-${name}":
-      ensure  => $ensure
+      ensure => $ensure,
+      # We know exactly what we want, we don't need recommended packages because they tend to be
+      # metapackages such as "php-apcu", which then install versions we don't want.
+      # Sury repo currently seems to point these metapackages to random specific php module versions,
+      # e.g. php-mysql points to php8.0-mysql, but php-apcu-bc points to php7.4-apcu-bc.
+      install_options => ['--no-install-recommends'],
     }
   }
 }
