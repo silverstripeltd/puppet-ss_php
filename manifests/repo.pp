@@ -1,4 +1,6 @@
-class ss_php::repo {
+class ss_php::repo(
+  $debian_repo_location,
+) {
   include apt
 
   apt::key { 'php':
@@ -8,12 +10,12 @@ class ss_php::repo {
 
   ensure_packages(['apt-transport-https', 'lsb-release', 'ca-certificates'], {'ensure' => 'present'})
 
-  if ($os::name == 'Ubuntu') {
+  if ($facts['os']['name'] == 'Ubuntu') {
     apt::ppa { 'ppa:ondrej/php': }
-  } elsif $os::name == 'Debian' {
+  } elsif $facts['os']['name'] == 'Debian' {
     apt::source { 'php':
-      location => $ss_php::params::debian_repo_location,
-      release  => $os::distro::codename,
+      location => $debian_repo_location,
+      release  => $facts['os']['distro']['codename'],
       repos    => 'main',
       notify   => Exec['ss_php_repo_force_update'],
       include  => {
